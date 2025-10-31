@@ -1,3 +1,4 @@
+import { db } from "@/app/db/db";
 import { openai } from "@ai-sdk/openai";
 import { streamText, UIMessage, convertToModelMessages, tool, stepCountIs } from "ai";
 import { z } from "zod";
@@ -65,7 +66,9 @@ CREATE TABLE sales (
 
         execute: async ({ query }) => {
           console.log("Executing query:", query);
-          return query;
+          // Dangerous - Hamla hoskta hai yaha 
+           return await db.run(query)
+          
         },
       }),
     },
